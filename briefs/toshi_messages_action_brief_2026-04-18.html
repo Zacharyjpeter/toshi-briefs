@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toshi Messages — April Action Brief</title>
+<style>
+  :root {
+    --bg: #faf8f3;
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --ink-faint: #8a8a8a;
+    --paper: #ffffff;
+    --rule: #e8e4db;
+    --accent: #c8422a;
+    --accent-wash: #faeee8;
+    --maint: #b58a2c;
+    --maint-wash: #f9efd3;
+    --ops: #4a6fa5;
+    --ops-wash: #e4ecf5;
+    --both: #7a4c9e;
+    --both-wash: #ede3f5;
+    --vacancy: #c8422a;
+    --vacancy-wash: #faeee8;
+    --fire: #c8422a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    font-size: 15px;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 32px 80px; }
+
+  header {
+    border-top: 6px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 24px 0 16px;
+    margin-bottom: 28px;
+  }
+  .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 8px;
+  }
+  h1 {
+    font-family: 'Didot', 'Bodoni MT', 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1.05;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .subtitle { font-style: italic; color: var(--ink-soft); font-size: 16px; margin: 0; }
+
+  .methodology {
+    background: var(--paper);
+    border-left: 4px solid var(--ink);
+    padding: 16px 20px;
+    margin-bottom: 32px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .methodology strong { display: block; font-family: 'Didot', Georgia, serif; font-size: 17px; font-weight: 400; margin-bottom: 6px; }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    margin-bottom: 40px;
+  }
+  .stat {
+    padding: 16px 20px;
+    border-right: 1px solid var(--rule);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Didot', 'Bodoni MT', Georgia, serif;
+    font-size: 28px;
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 6px;
+  }
+
+  section { margin-bottom: 48px; }
+  h2 {
+    font-family: 'Didot', 'Bodoni MT', Georgia, serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  h2 .num {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    margin-right: 12px;
+    vertical-align: middle;
+  }
+  .section-note {
+    font-style: italic;
+    color: var(--ink-soft);
+    margin: 0 0 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 14px;
+  }
+
+  .property-card {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .prop-head {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 16px;
+    padding: 18px 24px;
+    align-items: center;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .prop-rank {
+    font-family: 'Didot', Georgia, serif;
+    font-size: 44px;
+    line-height: 1;
+    color: var(--accent);
+  }
+  .prop-title-block .prop-name {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+  .prop-title-block .prop-meta {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.05em;
+  }
+  .prop-meta strong { color: var(--ink); }
+  .prop-flags { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+  .vacancy-flag {
+    background: var(--vacancy-wash);
+    color: var(--vacancy);
+    border: 1px solid var(--vacancy);
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    font-weight: bold;
+  }
+
+  .theme-list {
+    padding: 0;
+  }
+  .theme-row {
+    display: grid;
+    grid-template-columns: 36px 1fr 90px;
+    gap: 16px;
+    padding: 16px 24px;
+    border-bottom: 1px dotted var(--rule);
+    align-items: start;
+  }
+  .theme-row:last-child { border-bottom: none; }
+  .theme-num {
+    font-family: 'Didot', Georgia, serif;
+    font-size: 22px;
+    color: var(--ink-faint);
+    line-height: 1;
+    padding-top: 4px;
+  }
+  .theme-body .theme-text {
+    font-weight: 600;
+    font-size: 15px;
+    margin: 0 0 6px;
+    line-height: 1.35;
+  }
+  .theme-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .badge {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid;
+    font-weight: bold;
+  }
+  .badge-maint { background: var(--maint-wash); color: var(--maint); border-color: var(--maint); }
+  .badge-ops { background: var(--ops-wash); color: var(--ops); border-color: var(--ops); }
+  .badge-both { background: var(--both-wash); color: var(--both); border-color: var(--both); }
+  .badge-cat { background: transparent; color: var(--ink-faint); border-color: var(--rule); font-weight: normal; }
+  .badge-recency { background: var(--accent-wash); color: var(--accent); border-color: var(--accent); }
+  .badge-recency.old { background: transparent; color: var(--ink-faint); border-color: var(--rule); }
+
+  .theme-quote {
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 12px;
+    margin-top: 6px;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+  .theme-metrics {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    text-align: right;
+    line-height: 1.7;
+  }
+  .theme-metrics strong { color: var(--ink); font-size: 14px; }
+  .theme-metrics .score-val { color: var(--accent); font-size: 16px; }
+
+  .summary-box {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 24px 28px;
+    margin-bottom: 40px;
+  }
+  .summary-box h3 {
+    font-family: 'Didot', Georgia, serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin: 0 0 12px;
+  }
+  .summary-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .summary-box li {
+    padding: 8px 0;
+    border-bottom: 1px dotted var(--rule);
+    font-size: 14px;
+  }
+  .summary-box li:last-child { border-bottom: none; }
+  .summary-box li strong { color: var(--accent); }
+
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    padding: 16px 20px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+  .legend-swatch {
+    width: 14px; height: 14px;
+    border: 1px solid;
+  }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--ink);
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 700px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .stat { border-bottom: 1px solid var(--rule); }
+    h1 { font-size: 32px; }
+    .prop-head { grid-template-columns: 40px 1fr; }
+    .prop-flags { grid-column: 1 / -1; align-items: flex-start; }
+    .theme-row { grid-template-columns: 28px 1fr; }
+    .theme-metrics { grid-column: 2; text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Toshi Partners · Guest-message action brief · April 2026</p>
+  <h1>The <em>short list</em>.</h1>
+  <p class="subtitle">8 properties. 32 actions. Double-Pareto filtered from 39 scoring properties and 649 themes. 90 days ending 2026-04-18.</p>
+</header>
+
+<div class="methodology">
+  <strong>How this list was built</strong>
+  We pulled every guest message from every property across all channels (Airbnb, VRBO, BDC, SMS, email, WhatsApp) for the last 90 days. An LLM extracted complaint themes and scored each by <em>frequency × recency² × severity</em>. Frequency means <strong>distinct guests</strong> — one guest sending five messages about a broken door counts as 1, not 5. From 39 properties with scored themes, we took the top 20% (8 properties) by total score. From each of those, we took the top 20% of themes. That's the list below.
+</div>
+
+<div class="stats-row">
+  <div class="stat"><div class="stat-num">8</div><div class="stat-label">Properties</div></div>
+  <div class="stat"><div class="stat-num">32</div><div class="stat-label">Actions</div></div>
+  <div class="stat"><div class="stat-num">3</div><div class="stat-label">On April vacancy list</div></div>
+  <div class="stat"><div class="stat-num">W1</div><div class="stat-label">Most themes are active (last 7d)</div></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-swatch" style="background: var(--maint-wash); border-color: var(--maint);"></span>Maintenance — physical visit needed</div>
+  <div class="legend-item"><span class="legend-swatch" style="background: var(--ops-wash); border-color: var(--ops);"></span>Ops — listing / comms fix</div>
+  <div class="legend-item"><span class="legend-swatch" style="background: var(--both-wash); border-color: var(--both);"></span>Both</div>
+  <div class="legend-item"><span class="legend-swatch" style="background: var(--accent-wash); border-color: var(--accent);"></span>W1 = last 7 days (active)</div>
+</div>
+
+<section id="properties"></section>
+
+<div class="summary-box">
+  <h3>Cross-reference with April vacancy list</h3>
+  <ul>
+    <li><strong>3 of 8 properties</strong> overlap with the April Vacancies list: <em>1B 1003 NW 34 A</em>, <em>3B 1514 NW 9 A Front</em>, <em>3B 2500 Cashion- 1</em> (sibling to Cashion 2 on the list). Start here — guest complaints and booking gaps are compounding.</li>
+    <li><strong>5 of 8 properties</strong> are booking fine but have reputation risk accumulating. <em>Meridian HT</em> leads the portfolio on complaint weight without showing up on vacancy triage — a leading indicator before bookings sag.</li>
+  </ul>
+</div>
+
+<footer>
+  Generated 2026-04-18 · 90-day window · Source: Hostfully agency-level /messages endpoint, LLM theme extraction (Opus 4.6), recency-weighted scoring · Methodology full detail: see toshi-messages repo CLAUDE.md
+</footer>
+
+</div>
+
+<script>
+const PARETO_DATA = [{"property": "5B 2804 N Meridian HT", "vacancy_note": null, "total_score": 188.0, "total_themes": 22, "total_leads": 113, "top_themes": [{"theme": "Pest infestation (earwigs) \u2014 biting guests, inside beds and luggage", "category": "Pest issues", "score": 90.0, "frequency": 18, "severity": 5, "recency": "W1", "owner": "Maintenance", "quote": "there is a concerning amount of earwig bugs inside the home. We have killed so many and they are crawling on the walls, inside showers, on ceilings and falling into our beds. Some of us have been bitten by these bugs."}, {"theme": "Refund shortfall / promised refund not fully delivered (reputation risk)", "category": "Refund / policy disputes", "score": 16.2, "frequency": 5, "severity": 4, "recency": "W2", "owner": "Ops", "quote": "I did not receive a full refund? The charge from Toshi was $1,770.90 but I was refunded only $1,700.06. There is a $70.84 difference. The concellation agreement stated full refund before May."}, {"theme": "Repeated early check-in requests \u2014 listing check-in time may be unclear or inflexible", "category": "Systemic listing gaps", "score": 15.0, "frequency": 15, "severity": 1, "recency": "W1", "owner": "Ops", "quote": "Is there anyway I can check in a couple hours earlier? Around 2:00pm?"}, {"theme": "Guests confused about garage studio / shared space \u2014 listing copy unclear", "category": "Systemic listing gaps", "score": 12.0, "frequency": 12, "severity": 1, "recency": "W1", "owner": "Ops", "quote": "I had a question regarding the garage studio. With 12 people and our dog is the studio included or is that a separate area still?"}]}, {"property": "3B 2500 Cashion- 1", "vacancy_note": "2500 Cashion 2 (sibling unit on vacancy list)", "total_score": 125.0, "total_themes": 13, "total_leads": 55, "top_themes": [{"theme": "Guest locked out / access code not working on arrival", "category": "Access & check-in", "score": 40.0, "frequency": 8, "severity": 5, "recency": "W1", "owner": "Maintenance", "quote": "Not works... I tried again... Please help us. We arrived from SAN Ant\u00f4nio. We're very tires"}, {"theme": "Confusing check-in process / address and directions hard to find", "category": "Access & check-in", "score": 27.0, "frequency": 9, "severity": 3, "recency": "W1", "owner": "Ops", "quote": "Hello there, I'm not seeming to find the address anywhere on the messages we have had. Can you msg it to me please."}, {"theme": "Arrival guide / rental agreement links broken or inaccessible", "category": "Pre-arrival onboarding", "score": 24.0, "frequency": 8, "severity": 3, "recency": "W1", "owner": "Both", "quote": "The arrival guide is sending me to Canva and I don't have a Canva account"}]}, {"property": "3B 1514 NW 9 A Front", "vacancy_note": "1514 NW 9 Front", "total_score": 96.0, "total_themes": 22, "total_leads": 63, "top_themes": [{"theme": "WiFi not working / network not visible", "category": "WiFi / connectivity", "score": 39.4, "frequency": 14, "severity": 5, "recency": "W3", "owner": "Maintenance", "quote": "Hi we are unable to get the WiFi to work \"toshistay\" isn't a wifi name option when searching on our phones. The tv shows toshistay but it says \"not in range\"."}, {"theme": "Washer/dryer confusion \u2014 listing advertises but unclear availability or extra charges", "category": "Systemic listing gaps", "score": 19.4, "frequency": 8, "severity": 3, "recency": "W2", "owner": "Ops", "quote": "There was no mention of charges to use a washer and dryer prior to booking. I was told in the above messages that there was a washer and dryer available in the house."}, {"theme": "Cancellation \u2014 listing mismatch after viewing video tour", "category": "Cancellations \u2014 listing / price mismatch", "score": 9.7, "frequency": 4, "severity": 3, "recency": "W2", "owner": "Ops", "quote": "Hello after watching the tour I don't think this is the right place for me."}, {"theme": "Kitchen smells like mildew and urine", "category": "Cleanliness & turnover", "score": 8.0, "frequency": 2, "severity": 4, "recency": "W1", "owner": "Maintenance", "quote": "Hello, i wanted to make sure you know that the kitchen smells like mildew and urine."}]}, {"property": "5B 5000 N College HT", "vacancy_note": null, "total_score": 62.7, "total_themes": 21, "total_leads": 85, "top_themes": [{"theme": "Hot tub electrical/mechanical failure \u2014 unable to use paid amenity", "category": "Broken furniture / fixtures", "score": 16.0, "frequency": 4, "severity": 4, "recency": "W1", "owner": "Maintenance", "quote": "We checked the fuse because it wasn't getting any power and noticed an electric issue took a picture and did not proceed any further"}, {"theme": "Repeated questions about hot tub inclusion/cost/access (listing clarity gap)", "category": "Systemic listing gaps", "score": 16.0, "frequency": 16, "severity": 1, "recency": "W1", "owner": "Both", "quote": "Hello, can you please confirm that the hot tub is included in the reservation?"}, {"theme": "Repeated early check-in requests (listing/process clarity gap)", "category": "Systemic listing gaps", "score": 13.8, "frequency": 17, "severity": 1, "recency": "W2", "owner": "Ops", "quote": "We were wondering if there's any chance we could get that time moved up to check in earlier? We have people flying in from all over the US for a wedding, and some would have to wait hours with bags and no where to go."}, {"theme": "Guest locked out \u2014 door code not working", "category": "Access & check-in", "score": 3.7, "frequency": 6, "severity": 5, "recency": "M2", "owner": "Maintenance", "quote": "We get out then presses locked (maybe we should've not). So when we need to enter the code doesn't work anymore."}]}, {"property": "1B 1003 NW 34 A", "vacancy_note": "1003 NW 34 A", "total_score": 62.1, "total_themes": 15, "total_leads": 16, "top_themes": [{"theme": "Front door keypad/lock code not working at check-in", "category": "Access & check-in", "score": 35.0, "frequency": 7, "severity": 5, "recency": "W1", "owner": "Maintenance", "quote": "Hi there, I'm here at the front for and the code is not working"}, {"theme": "WiFi not working / wrong password provided", "category": "WiFi / connectivity", "score": 16.0, "frequency": 4, "severity": 4, "recency": "W1", "owner": "Maintenance", "quote": "I've been trying to sign into wifi since yesterday. I keep getting this error notification, unfortunately\ud83d\ude22"}, {"theme": "Pre-arrival links/agreements not received by guests", "category": "Pre-arrival onboarding", "score": 4.5, "frequency": 4, "severity": 2, "recency": "W3", "owner": "Ops", "quote": "I did not receive link, will you send to this phone number 8605390610"}]}, {"property": "5B 7113 N Lakeway HT", "vacancy_note": null, "total_score": 61.8, "total_themes": 27, "total_leads": 33, "top_themes": [{"theme": "Microwave child-locked and unable to be unlocked", "category": "Broken furniture / fixtures", "score": 15.0, "frequency": 5, "severity": 3, "recency": "W1", "owner": "Maintenance", "quote": "Just so you're aware the microwave has been child lock the whole time and after reading the instructions it still won't open"}, {"theme": "Insufficient towels for guest count", "category": "Supplies / stocking", "score": 14.6, "frequency": 6, "severity": 3, "recency": "W2", "owner": "Ops", "quote": "If this place can sleep 14, you'll need more towels than 1 per person for 3 days. Maybe we're missing them somewhere, but consider 2 towels per available sleepers, not per room."}, {"theme": "Rental agreement / e-signature process confusing or broken", "category": "Pre-arrival onboarding", "score": 6.0, "frequency": 3, "severity": 2, "recency": "W1", "owner": "Both", "quote": "I've tried signing the rental agreement but the submit button isn't working."}, {"theme": "Hot tub fee confusion \u2014 guests unclear it costs extra or how to pay", "category": "Policy / pricing clarity", "score": 5.0, "frequency": 5, "severity": 1, "recency": "W1", "owner": "Both", "quote": "En qu\u00e9 momento dice que usar el jacucci es cobro aparte."}, {"theme": "Hot tub dirty / cover left off on arrival", "category": "Cleanliness & turnover", "score": 3.0, "frequency": 1, "severity": 3, "recency": "W1", "owner": "Maintenance", "quote": "Just wanted you to know the cover was off the hot tub when we got here and is dirty as a result"}]}, {"property": "2B 916 Lilac 1", "vacancy_note": null, "total_score": 58.4, "total_themes": 18, "total_leads": 21, "top_themes": [{"theme": "Promised/expected refund not yet delivered \u2014 guest following up", "category": "Refund / policy disputes", "score": 20.0, "frequency": 5, "severity": 4, "recency": "W1", "owner": "Ops", "quote": "ho visto che alla fine l'alloggio ha ricevuto una nuova prenotazione... Mi fai sapere se c'\u00e8 qualche novit\u00e0 riguardo il rimborso"}, {"theme": "Guest confused about shared vs. entire-place listing \u2014 locked room discovered mid-stay", "category": "Listing accuracy", "score": 16.0, "frequency": 4, "severity": 4, "recency": "W1", "owner": "Ops", "quote": "ho l'intero alloggio per me giusto? Non ho condivisioni"}, {"theme": "Cancellation due to work relocation \u2014 guest requesting additional refund", "category": "Cancellations \u2014 personal / health", "score": 15.0, "frequency": 5, "severity": 3, "recency": "W1", "owner": "Ops", "quote": "dovrei cancellare la prenotazione, dovr\u00f2 andare a Austin per lavoro"}, {"theme": "Check-in time and early check-in unclear in listing", "category": "Systemic listing gaps", "score": 1.6, "frequency": 2, "severity": 1, "recency": "W2", "owner": "Ops", "quote": "I wasn't sure what time check in was but was hoping I could check in early tomorrow morning?"}]}, {"property": "6B 2260 NW 38", "vacancy_note": null, "total_score": 57.2, "total_themes": 27, "total_leads": 27, "top_themes": [{"theme": "Guest feels operation is a scam / unable to reach a real person", "category": "SLA / unresolved follow-ups", "score": 20.0, "frequency": 4, "severity": 5, "recency": "W1", "owner": "Ops", "quote": "I am starting to believe this is a scam because we cannot seem to get a real person on the phone."}, {"theme": "Insufficient hot water for group occupancy", "category": "Essential amenities", "score": 10.0, "frequency": 2, "severity": 5, "recency": "W1", "owner": "Maintenance", "quote": "There's hardly any hot water for us to take showers with I'm freezing"}, {"theme": "Guest lockout", "category": "Access & check-in", "score": 4.0, "frequency": 1, "severity": 4, "recency": "W1", "owner": "Ops", "quote": "We locked ourselves out. Any chance we could get someone to unlock the door."}, {"theme": "Mouse sighting / pest issue", "category": "Pest issues", "score": 3.2, "frequency": 1, "severity": 4, "recency": "W2", "owner": "Maintenance", "quote": "we saw a mouse yesterday near the fridge"}, {"theme": "Step between kitchen and other rooms \u2014 trip/fall hazard", "category": "Broken furniture / fixtures", "score": 3.0, "frequency": 1, "severity": 3, "recency": "W1", "owner": "Maintenance", "quote": "To step up and down going in and out the kitchen area and the rest of the rooms is indeed a workout and dangerous."}]}];
+
+function recencyClass(bucket) {
+  return ['W1', 'W2'].includes(bucket) ? '' : 'old';
+}
+
+function ownerBadge(owner) {
+  const map = { 'Maintenance': 'maint', 'Ops': 'ops', 'Both': 'both' };
+  return `<span class="badge badge-${map[owner]}">${owner}</span>`;
+}
+
+function escape(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+const container = document.getElementById('properties');
+container.innerHTML = PARETO_DATA.map((p, idx) => {
+  const themes = p.top_themes.map((t, i) => `
+    <div class="theme-row">
+      <div class="theme-num">${i+1}</div>
+      <div class="theme-body">
+        <div class="theme-text">${escape(t.theme)}</div>
+        <div class="theme-badges">
+          ${ownerBadge(t.owner)}
+          <span class="badge badge-recency ${recencyClass(t.recency)}">${t.recency}</span>
+          <span class="badge badge-cat">${escape(t.category)}</span>
+        </div>
+        ${t.quote ? `<div class="theme-quote">"${escape(t.quote.substring(0, 180))}${t.quote.length > 180 ? '…' : ''}"</div>` : ''}
+      </div>
+      <div class="theme-metrics">
+        <div class="score-val">${t.score}</div>
+        <div>score</div>
+        <div><strong>${t.frequency}</strong> guests</div>
+        <div>sev <strong>${t.severity}</strong></div>
+      </div>
+    </div>
+  `).join('');
+
+  return `
+    <article class="property-card">
+      <div class="prop-head">
+        <div class="prop-rank">${idx+1}</div>
+        <div class="prop-title-block">
+          <div class="prop-name">${escape(p.property)}</div>
+          <div class="prop-meta">Total score <strong>${p.total_score}</strong> · <strong>${p.total_themes}</strong> themes · <strong>${p.total_leads}</strong> guests</div>
+        </div>
+        <div class="prop-flags">
+          ${p.vacancy_note ? `<span class="vacancy-flag">On vacancy list</span>` : ''}
+        </div>
+      </div>
+      <div class="theme-list">${themes}</div>
+    </article>
+  `;
+}).join('');
+</script>
+</body>
+</html>
